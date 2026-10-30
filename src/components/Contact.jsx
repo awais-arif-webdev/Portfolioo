@@ -1,5 +1,5 @@
-import React, { useRef, useState } from 'react';
-import emailjs from '@emailjs/browser';
+import React, { useRef, useState } from "react";
+import emailjs from "@emailjs/browser";
 import {
   FiMail,
   FiMapPin,
@@ -8,19 +8,19 @@ import {
   FiSend,
   FiCheckCircle,
   FiAlertCircle,
-  FiCopy
-} from 'react-icons/fi';
+  FiCopy,
+} from "react-icons/fi";
 
 // EmailJS configuration
-const EMAILJS_SERVICE_ID = 'service_ej6dl7s';
-const EMAILJS_TEMPLATE_ID = 'template_j1han28';
-const EMAILJS_PUBLIC_KEY = 'tKoUFC7TYH7vtKDCM';
+const EMAILJS_SERVICE_ID = "service_ej6dl7s";
+const EMAILJS_TEMPLATE_ID = "template_j1han28";
+const EMAILJS_PUBLIC_KEY = "tKoUFC7TYH7vtKDCM";
 
 const initialFormData = {
-  from_name: '',
-  from_email: '',
-  subject: '',
-  message: ''
+  from_name: "",
+  from_email: "",
+  subject: "",
+  message: "",
 };
 
 const Contact = () => {
@@ -28,7 +28,7 @@ const Contact = () => {
 
   const [formData, setFormData] = useState(initialFormData);
   const [errors, setErrors] = useState({});
-  const [status, setStatus] = useState({ type: '', text: '' });
+  const [status, setStatus] = useState({ type: "", text: "" });
   const [copied, setCopied] = useState(false);
   const [isSending, setIsSending] = useState(false);
 
@@ -37,20 +37,22 @@ const Contact = () => {
     const newErrors = {};
 
     if (!formData.from_name.trim() || formData.from_name.trim().length < 2) {
-      newErrors.from_name = 'Please enter your full name (at least 2 characters).';
+      newErrors.from_name =
+        "Please enter your full name (at least 2 characters).";
     }
 
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(formData.from_email.trim())) {
-      newErrors.from_email = 'Please enter a valid email address.';
+      newErrors.from_email = "Please enter a valid email address.";
     }
 
     if (!formData.subject.trim() || formData.subject.trim().length < 3) {
-      newErrors.subject = 'Please enter a clear project subject.';
+      newErrors.subject = "Please enter a clear project subject.";
     }
 
     if (!formData.message.trim() || formData.message.trim().length < 15) {
-      newErrors.message = 'Please write at least 15 characters about your project.';
+      newErrors.message =
+        "Please write at least 15 characters about your project.";
     }
 
     setErrors(newErrors);
@@ -63,17 +65,17 @@ const Contact = () => {
 
     setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
 
     if (errors[name]) {
       setErrors((prev) => ({
         ...prev,
-        [name]: ''
+        [name]: "",
       }));
     }
 
-    setStatus({ type: '', text: '' });
+    setStatus({ type: "", text: "" });
   };
 
   // Send the message using EmailJS (sendForm)
@@ -82,20 +84,20 @@ const Contact = () => {
 
     if (isSending) return;
 
-    setStatus({ type: '', text: '' });
+    setStatus({ type: "", text: "" });
 
     if (!validate()) {
       setStatus({
-        type: 'error',
-        text: 'Please fix the highlighted fields before sending your message.'
+        type: "error",
+        text: "Please fix the highlighted fields before sending your message.",
       });
       return;
     }
 
     if (!formRef.current) {
       setStatus({
-        type: 'error',
-        text: 'Something went wrong. Please refresh the page and try again.'
+        type: "error",
+        text: "Something went wrong. Please refresh the page and try again.",
       });
       return;
     }
@@ -107,22 +109,22 @@ const Contact = () => {
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
         formRef.current,
-        EMAILJS_PUBLIC_KEY
+        EMAILJS_PUBLIC_KEY,
       );
 
       setStatus({
-        type: 'success',
-        text: 'Your message has been sent successfully! I will get back to you soon.'
+        type: "success",
+        text: "Your message has been sent successfully! I will get back to you soon.",
       });
 
       setFormData(initialFormData);
       setErrors({});
     } catch (error) {
-      console.error('EmailJS Error:', error);
+      console.error("EmailJS Error:", error);
 
       setStatus({
-        type: 'error',
-        text: 'Sorry, your message could not be sent. Please try again later.'
+        type: "error",
+        text: "Sorry, your message could not be sent. Please try again later.",
       });
     } finally {
       setIsSending(false);
@@ -131,7 +133,7 @@ const Contact = () => {
 
   // Copy contact email
   const handleCopyEmail = async () => {
-    const emailAddress = 'awais.arif.fs.dev@gmail.com';
+    const emailAddress = "awais.arif.fs.dev@gmail.com";
 
     try {
       await navigator.clipboard.writeText(emailAddress);
@@ -139,11 +141,11 @@ const Contact = () => {
 
       setTimeout(() => setCopied(false), 2500);
     } catch (error) {
-      console.error('Unable to copy email address:', error);
+      console.error("Unable to copy email address:", error);
 
       setStatus({
-        type: 'error',
-        text: 'Unable to copy the email address. Please copy it manually.'
+        type: "error",
+        text: "Unable to copy the email address. Please copy it manually.",
       });
     }
   };
@@ -531,7 +533,6 @@ const Contact = () => {
           {/* Contact Banner */}
           <div className="contact-banner reveal-up">
             <div className="contact-banner-grid">
-
               {/* Contact Information */}
               <div className="contact-banner-info">
                 <span className="section-eyebrow">
@@ -544,9 +545,9 @@ const Contact = () => {
                 </h2>
 
                 <p className="contact-invite">
-                  Whether it&apos;s a full-stack MERN application,
-                  custom e-commerce platform, or responsive web
-                  interface, I&apos;d love to hear what you&apos;re building.
+                  Whether it&apos;s a full-stack MERN application, custom
+                  e-commerce platform, or responsive web interface, I&apos;d
+                  love to hear what you&apos;re building.
                 </p>
 
                 <div className="contact-direct-list">
@@ -574,7 +575,7 @@ const Contact = () => {
                           aria-label="Copy email address"
                         >
                           <FiCopy size={14} />
-                          <span>{copied ? 'Copied!' : 'Copy'}</span>
+                          <span>{copied ? "Copied!" : "Copy"}</span>
                         </button>
                       </div>
                     </div>
@@ -598,7 +599,7 @@ const Contact = () => {
                 {/* Social Links */}
                 <div className="contact-socials">
                   <a
-                    href="https://github.com/awais-fs-dev"
+                    href="https://github.com/awais-arif-webdev"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="social-pill-link"
@@ -639,16 +640,14 @@ const Contact = () => {
                         placeholder="e.g. Talha Aleem"
                         value={formData.from_name}
                         onChange={handleChange}
-                        className={errors.from_name ? 'input-error' : ''}
+                        className={errors.from_name ? "input-error" : ""}
                         aria-invalid={Boolean(errors.from_name)}
                         autoComplete="name"
                         required
                       />
 
                       {errors.from_name && (
-                        <span className="field-error">
-                          {errors.from_name}
-                        </span>
+                        <span className="field-error">{errors.from_name}</span>
                       )}
                     </div>
 
@@ -663,16 +662,14 @@ const Contact = () => {
                         placeholder="name@company.com"
                         value={formData.from_email}
                         onChange={handleChange}
-                        className={errors.from_email ? 'input-error' : ''}
+                        className={errors.from_email ? "input-error" : ""}
                         aria-invalid={Boolean(errors.from_email)}
                         autoComplete="email"
                         required
                       />
 
                       {errors.from_email && (
-                        <span className="field-error">
-                          {errors.from_email}
-                        </span>
+                        <span className="field-error">{errors.from_email}</span>
                       )}
                     </div>
                   </div>
@@ -688,15 +685,13 @@ const Contact = () => {
                       placeholder="Full-Stack Web App / E-Commerce Store / Portfolio"
                       value={formData.subject}
                       onChange={handleChange}
-                      className={errors.subject ? 'input-error' : ''}
+                      className={errors.subject ? "input-error" : ""}
                       aria-invalid={Boolean(errors.subject)}
                       required
                     />
 
                     {errors.subject && (
-                      <span className="field-error">
-                        {errors.subject}
-                      </span>
+                      <span className="field-error">{errors.subject}</span>
                     )}
                   </div>
 
@@ -711,15 +706,13 @@ const Contact = () => {
                       placeholder="Tell me about your goals, timeline, and required features..."
                       value={formData.message}
                       onChange={handleChange}
-                      className={errors.message ? 'input-error' : ''}
+                      className={errors.message ? "input-error" : ""}
                       aria-invalid={Boolean(errors.message)}
                       required
                     />
 
                     {errors.message && (
-                      <span className="field-error">
-                        {errors.message}
-                      </span>
+                      <span className="field-error">{errors.message}</span>
                     )}
                   </div>
 
@@ -727,14 +720,14 @@ const Contact = () => {
                   {status.text && (
                     <div
                       className={`form-alert ${
-                        status.type === 'success'
-                          ? 'alert-success'
-                          : 'alert-error'
+                        status.type === "success"
+                          ? "alert-success"
+                          : "alert-error"
                       }`}
                       role="status"
                       aria-live="polite"
                     >
-                      {status.type === 'success' ? (
+                      {status.type === "success" ? (
                         <FiCheckCircle size={18} />
                       ) : (
                         <FiAlertCircle size={18} />
@@ -751,16 +744,13 @@ const Contact = () => {
                     disabled={isSending}
                   >
                     <span>
-                      {isSending
-                        ? 'Sending Your Inquiry...'
-                        : 'Send Message'}
+                      {isSending ? "Sending Your Inquiry..." : "Send Message"}
                     </span>
 
                     <FiSend size={17} />
                   </button>
                 </form>
               </div>
-
             </div>
           </div>
         </div>
