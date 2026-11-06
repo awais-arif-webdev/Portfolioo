@@ -424,22 +424,18 @@
 
 // export default Navbar;
 
-
-
-
-
-import React, { useState, useEffect, useRef } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { FiMenu, FiX, FiArrowUpRight } from 'react-icons/fi';
+import React, { useState, useEffect, useRef } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { FiMenu, FiX, FiArrowUpRight } from "react-icons/fi";
 
 const NAV_ITEMS = [
-  { id: 'home', label: 'Home', path: '/' },
-  { id: 'about', label: 'About', path: '/about' },
-  { id: 'skills', label: 'Skills', path: '/skills' },
-  { id: 'services', label: 'Services', path: '/services' },
-  { id: 'projects', label: 'Projects', path: '/projects' },
-  { id: 'process', label: 'Process', path: '/process' },
-  { id: 'contact', label: 'Contact', path: '/contact' }
+  { id: "home", label: "Home", path: "/" },
+  { id: "about", label: "About", path: "/about" },
+  { id: "skills", label: "Skills", path: "/skills" },
+  { id: "services", label: "Services", path: "/services" },
+  { id: "projects", label: "Projects", path: "/projects" },
+  { id: "process", label: "Process", path: "/process" },
+  { id: "contact", label: "Contact", path: "/contact" },
 ];
 
 const Navbar = ({ activeSection, onNavigate }) => {
@@ -452,8 +448,8 @@ const Navbar = ({ activeSection, onNavigate }) => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 30);
     };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   // Close mobile dropdown when clicking outside
@@ -463,8 +459,8 @@ const Navbar = ({ activeSection, onNavigate }) => {
         setMenuOpen(false);
       }
     };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [menuOpen]);
 
   // Close mobile menu whenever route changes
@@ -847,12 +843,15 @@ const Navbar = ({ activeSection, onNavigate }) => {
         }
       `}</style>
 
-      <header className={`navbar-wrapper ${scrolled ? 'navbar-scrolled' : ''}`} ref={navRef}>
+      <header
+        className={`navbar-wrapper ${scrolled ? "navbar-scrolled" : ""}`}
+        ref={navRef}
+      >
         <div className="navbar-inner">
           <Link
             to="/"
             className="brand-logo"
-            onClick={() => handleLinkClick({ id: 'home', path: '/' })}
+            onClick={() => handleLinkClick({ id: "home", path: "/" })}
             aria-label="Awais Mughal Home"
           >
             {/* <span className="brand-avatar">AM</span> */}
@@ -869,7 +868,13 @@ const Navbar = ({ activeSection, onNavigate }) => {
               focusable="false"
             >
               <defs>
-                <linearGradient id="brandFlourishGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <linearGradient
+                  id="brandFlourishGradient"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="0%"
+                >
                   <stop offset="0%" stopColor="#ffd166" stopOpacity="0" />
                   <stop offset="25%" stopColor="#ffd166" />
                   <stop offset="70%" stopColor="#f5a623" />
@@ -889,7 +894,7 @@ const Navbar = ({ activeSection, onNavigate }) => {
                 <li key={item.id}>
                   <Link
                     to={item.path}
-                    className={`nav-link ${isItemActive(item) ? 'active' : ''}`}
+                    className={`nav-link ${isItemActive(item) ? "active" : ""}`}
                     onClick={() => handleLinkClick(item)}
                   >
                     {item.label}
@@ -903,7 +908,9 @@ const Navbar = ({ activeSection, onNavigate }) => {
             <Link
               to="/contact"
               className="nav-cta"
-              onClick={() => handleLinkClick({ id: 'contact', path: '/contact' })}
+              onClick={() =>
+                handleLinkClick({ id: "contact", path: "/contact" })
+              }
             >
               <span>Let&apos;s talk</span>
               <FiArrowUpRight className="icon-inline" />
@@ -912,7 +919,9 @@ const Navbar = ({ activeSection, onNavigate }) => {
             <button
               type="button"
               className="mobile-menu-toggle"
-              aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+              aria-label={
+                menuOpen ? "Close navigation menu" : "Open navigation menu"
+              }
               aria-expanded={menuOpen}
               onClick={() => setMenuOpen((prev) => !prev)}
             >
@@ -922,13 +931,13 @@ const Navbar = ({ activeSection, onNavigate }) => {
         </div>
 
         {/* Mobile Dropdown Menu */}
-        <div className={`mobile-dropdown ${menuOpen ? 'open' : ''}`}>
+        <div className={`mobile-dropdown ${menuOpen ? "open" : ""}`}>
           <ul className="mobile-nav-list">
             {NAV_ITEMS.map((item) => (
               <li key={item.id}>
                 <Link
                   to={item.path}
-                  className={`mobile-nav-link ${isItemActive(item) ? 'active' : ''}`}
+                  className={`mobile-nav-link ${isItemActive(item) ? "active" : ""}`}
                   onClick={() => handleLinkClick(item)}
                 >
                   <span>{item.label}</span>
@@ -941,7 +950,9 @@ const Navbar = ({ activeSection, onNavigate }) => {
             <Link
               to="/contact"
               className="mobile-cta-btn"
-              onClick={() => handleLinkClick({ id: 'contact', path: '/contact' })}
+              onClick={() =>
+                handleLinkClick({ id: "contact", path: "/contact" })
+              }
             >
               <span>Let&apos;s Talk Now</span>
               <FiArrowUpRight size={18} />
